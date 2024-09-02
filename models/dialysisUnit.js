@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const dialysisUnitSchema = new Schema({
   hospitalId: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Hospital',
     required: [true, 'Hospital ID is required']
   },
@@ -13,25 +13,17 @@ const dialysisUnitSchema = new Schema({
     required: [true, 'Unit name is required'],
     trim: true
   },
-  address: {
+  description: {
     type: String,
-    required: [true, 'Address is required'],
+    required: [true, 'description is required'],
     trim: true
   },
-  phone: {
-    type: String,
-    required: [true, 'Phone number is required'],
-    match: [/^\d{10,15}$/, 'Please enter a valid phone number']
-  },
-  capacity: {
-    type: Number,
-    required: [true, 'Capacity is required']
-  },
   createdBy: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: [true, 'Creator ID is required']
-  }
+  },
+  isActive: { type: Boolean, default: true },
 });
 
 // Create the Dialysis Unit model

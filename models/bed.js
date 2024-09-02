@@ -6,7 +6,7 @@ const { BedStatus } = require("../utils/enums");
 const bedSchema = new Schema(
   {
     dialysisUnitId: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "DialysisUnit",
       required: [true, "Dialysis Unit ID is required"],
     },
@@ -20,6 +20,7 @@ const bedSchema = new Schema(
       enum: [BedStatus.OCCUPIED, BedStatus.AVAILABLE], // Use the enum values
       default: BedStatus.AVAILABLE, // Default to available
     },
+    isActive: { type: Boolean, default: true },
   },
   { timestamps: true }
 );

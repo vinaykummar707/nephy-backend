@@ -1,6 +1,6 @@
 // routes/bed.js
 const Bed = require("../models/bed");
-const DialysisUnit = require("../models/dialysisUnits");
+const DialysisUnit = require("../models/dialysisUnit");
 const { BedStatus } = require("../utils/enums");
 const checkAdminRole = require("../middleware/checkAdminRole");
 

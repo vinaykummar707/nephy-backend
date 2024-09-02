@@ -1,5 +1,5 @@
 // routes/dialysisUnit.js
-const DialysisUnit = require("../models/dialysisUnits");
+const DialysisUnit = require("../models/dialysisUnit");
 const Hospital = require("../models/hospital");
 const User = require("../models/user"); // Assuming you have a User model
 const checkHospitalAdmin = require("../middleware/checkHospitalAdmin");

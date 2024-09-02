@@ -29,32 +29,27 @@ const hospitalSchema = new Schema(
       required: [true, "Phone number is required"],
       match: [/^\d{10,15}$/, "Please enter a valid phone number"],
     },
-    email: {
-      type: String,
-      required: [true, "Email is required"],
-      unique: true,
-      lowercase: true,
-      trim: true,
-      match: [/.+@.+\..+/, "Please enter a valid email address"],
-    },
+
     googleMapCoords: {
       latitude: {
         type: Number,
-        required: [true, "Latitude is required"],
+        required: [false, "Latitude is required"],
       },
       longitude: {
         type: Number,
-        required: [true, "Longitude is required"],
+        required: [false, "Longitude is required"],
       },
     },
     logo: {
       type: String, // Assuming logo is stored as a URL or a path to the image
-      required: [true, "Logo is required"],
+      required: [false, "Logo is required"],
     },
-    established: {
-      type: Date,
-      required: [true, "Established date is required"],
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: [true, 'User ID is required']
     },
+    isActive: { type: Boolean, default: true },
   },
   {
     timestamps: true,
