@@ -4,7 +4,7 @@ const mongoosePlugin = require("./plugins/mongoose");
 
 fastify.register(require("@fastify/cors"), {
   origin: "*",
-  methods: ["POST"]
+  methods: ["POST"],
 });
 
 // Register the Mongoose plugin
@@ -22,6 +22,10 @@ fastify.register(require("./routes/dialysisUnits"));
 // Register the bed routes
 fastify.register(require("./routes/bed"));
 fastify.register(require("./routes/dialysisUnitAdmin"));
+
+fastify.register(require("./routes/dialysisMachineRoutes"));
+
+fastify.register(require('./routes/patient'))
 
 // Define a basic route
 fastify.get("/", async (request, reply) => {

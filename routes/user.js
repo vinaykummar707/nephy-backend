@@ -5,6 +5,7 @@ const DialysisUnitAdmin = require('../models/dialysisUnitAdmin');
 const checkHospitalAdmin = require('../middleware/checkHospitalAdmin');
 const { UserRoles } = require('../utils/enums');
 const bcrypt = require('bcrypt');
+const userService = require('../services/userService');
 
 module.exports = async function (fastify, opts) {
 	// Route to register a new user
@@ -113,19 +114,14 @@ module.exports = async function (fastify, opts) {
 	});
 
 	// Route to get user details
-	fastify.get('/users/:id', async (request, reply) => {
-		const { id } = request.params;
-
+	fastify.get('/user/:userId', async (request, reply) => {
+		const { userId } = request.params;
+		
 		try {
-			const user = await User.findById(id);
-			if (!user) {
-				return reply.status(404).send({ error: 'User not found' });
-			}
-			reply.send(user);
+			const userData = await userService.getUserWithProfileAggregation(userId);
+			reply.send({ success: true, data: userData });
 		} catch (error) {
-			reply
-				.status(500)
-				.send({ error: 'Internal Server Error', details: error.message });
+			reply.code(404).send({ success: false, message: error.message });
 		}
 	});
 };

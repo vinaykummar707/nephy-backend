@@ -56,13 +56,13 @@ module.exports = async function (fastify, opts) {
       }
 
       // Find hospitals where createdBy matches userId
-      const hospitals = await Hospital.find({ createdBy: new mongoose.Types.ObjectId(userId) });
+      const hospital = await Hospital.findOne({ createdBy: new mongoose.Types.ObjectId(userId) });
 
-      if (hospitals.length === 0) {
-        return reply.status(200).send({ message: 'No hospitals found for this user',hospitals: hospitals });
+      if (!hospital) {
+        return reply.status(200).send(hospital);
       }
 
-      reply.status(200).send({ message: 'Fetched Hospitals Successfully',hospitals: hospitals });
+      reply.status(200).send(hospital);
     } catch (error) {
       reply.status(500).send({ error: 'Internal Server Error', details: error.message });
     }

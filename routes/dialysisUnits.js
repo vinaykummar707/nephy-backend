@@ -44,4 +44,22 @@ module.exports = async function (fastify, opts) {
       }
     }
   );
+  
+  fastify.get('/dialysis-units/:hospitalId', async (request, reply) => {
+    const { hospitalId } = request.params;
+
+    try {
+      // Find dialysis units by hospital ID
+      const dialysisUnits = await DialysisUnit.find({ hospitalId, isActive: true });
+
+      if (!dialysisUnits || dialysisUnits.length === 0) {
+        return reply.status(404).send({ error: 'No dialysis units found for this hospital' });
+      }
+
+      // Send the list of dialysis units
+      reply.send(dialysisUnits );
+    } catch (error) {
+      reply.status(500).send({ error: 'Internal Server Error', details: error.message });
+    }
+  });
 };

@@ -20,6 +20,7 @@ const bedSchema = new Schema(
       enum: [BedStatus.OCCUPIED, BedStatus.AVAILABLE], // Use the enum values
       default: BedStatus.AVAILABLE, // Default to available
     },
+    isOccupied: { type: Boolean, default: false },
     isActive: { type: Boolean, default: true },
   },
   { timestamps: true }
